@@ -1,0 +1,145 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="over" opened="false">  
+    <mainsidenav></mainsidenav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+      <mat-toolbar color="primary">
+          <mat-toolbar-row>
+            <button (click)="sidenav.toggle()" mat-icon-button>
+                <mat-icon>list</mat-icon>
+            </button>
+            <span>Flights</span>
+            <span class="example-spacer"></span>
+            <!-- <mat-icon class="example-icon">favorite</mat-icon>
+            <mat-icon class="example-icon">delete</mat-icon> -->
+            <button style="position: absolute; top: 1%; right: 0;" mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+          </mat-toolbar-row>
+        </mat-toolbar>
+        
+        <mat-menu #menu="matMenu">
+            <sidemenu></sidemenu>
+        </mat-menu>
+      
+
+      <mat-card class="flight-container">
+        <!-- <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header> -->
+        <!-- <img mat-card-image src="/assets/images/flights-header.jpg" alt="Flights"> -->
+        <mat-card-content>
+          <!-- filter buttons -->
+          <mat-card>
+              <mat-card-actions>
+                  <mat-list>
+                      <mat-list-item>
+                          <mat-form-field>
+                              <mat-select placeholder="Select Trip Type">
+                                <mat-option *ngFor="let type of tripType" [value]="type.slug">
+                                  {{type.label }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            &nbsp;&nbsp;&nbsp;
+                            <!-- <mat-form-field>
+                              <mat-select placeholder="Favorite food">
+                                <mat-option *ngFor="let food of foods" [value]="food.value">
+                                  {{ food.viewValue }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field> -->
+                            <mat-form-field>
+                              <mat-select placeholder="Select Trip Class">
+                                <mat-option *ngFor="let class of tripClass" [value]="class.slug">
+                                  {{ class.label }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+
+                            <mat-placeholder style="color: rgba(255,255,255,0.7);">Passengers</mat-placeholder>
+                            &nbsp;
+                            <mat-slider style="width:50%;" min="1" max="20" thumbLabel tickInterval="1" step="1" value="1"></mat-slider>
+          
+                      </mat-list-item>
+                          <!-- <mat-divider></mat-divider> -->
+                      <mat-list-item>
+                        <!-- source trips -->
+                          <mat-form-field class="autocomplete-inputs">
+                            <input type="text" [(ngModel)]="filters.tripSource" required matInput [formControl]="sourceTripControl" [matAutocomplete]="tripsources">
+                            <mat-autocomplete #tripsources="matAutocomplete">
+                                <mat-option *ngFor="let option of tripSourceOptions" [value]="option.slug">
+                                  {{ option.label }}
+                                </mat-option>
+                              </mat-autocomplete>
+                          
+                          </mat-form-field>
+                          <mat-icon>swap_horiz</mat-icon>
+                          <!-- dest trips -->
+                          <mat-form-field class="autocomplete-inputs">
+                            <input type="text" [(ngModel)]="filters.tripDest" required matInput [formControl]="destTripControl" [matAutocomplete]="tripdestinations">
+                            <mat-autocomplete #tripdestinations="matAutocomplete">
+                              <mat-option *ngFor="let option of tripDestOptions" [value]="option.slug">
+                                {{ option.label }}
+                              </mat-option>
+                            </mat-autocomplete>
+                          
+                          </mat-form-field>
+
+                          &nbsp;&nbsp;&nbsp;
+                          <!-- source date -->
+                          <mat-form-field>
+                            <input [(ngModel)]="filters.tripStartDate" required matInput [min]="minDate" [matDatepicker]="departurepicker" placeholder="Departure Date" disabled>
+                            <mat-datepicker-toggle matSuffix [for]="departurepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #departurepicker disabled="false"></mat-datepicker>
+                          </mat-form-field>
+
+                          &nbsp;&nbsp;&nbsp;
+                          <!-- dest date -->
+                          <mat-form-field>
+                            <input [(ngModel)]="filters.tripEndDate" required matInput [min]="minDate" [matDatepicker]="arrivalpicker" placeholder="Arrival Date" disabled>
+                            <mat-datepicker-toggle matSuffix [for]="arrivalpicker"></mat-datepicker-toggle>
+                            <mat-datepicker #arrivalpicker disabled="false"></mat-datepicker>
+                          </mat-form-field>
+
+                          &nbsp;&nbsp;&nbsp;
+
+                          <button (click)="getFlights()" mat-raised-button color="primary"><mat-icon>youtube_searched_for</mat-icon>SEARCH</button>
+                          
+                      </mat-list-item>
+                  </mat-list>
+ 
+              </mat-card-actions>
+          </mat-card>
+
+          <mat-card>
+              <mat-accordion>
+                  <mat-expansion-panel *ngFor="let flight of flightData">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        {{flight.from}} - {{flight.to}}
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        <div>{{flight.carrier}}</div>
+
+                        <div style="margin-left: 50%;">Rs&nbsp;{{flight.price}}</div>
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                
+                    <mat-card-title>
+                      Ports: {{flight.details ? flight.details.fromport : 'NA'}} to {{flight.details ? flight.details.toport : 'NA'}}  <button style="float: right;" (click)="openPrintDialogue(flight)" mat-raised-button color="primary">View & Print</button>
+                    </mat-card-title>
+                
+                  </mat-expansion-panel>
+
+                </mat-accordion>
+          </mat-card>
+        </mat-card-content>
+
+      </mat-card>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+  

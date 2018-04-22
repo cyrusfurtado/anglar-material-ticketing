@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-title>
+    {{data.from}} - {{data.to}}
+  </mat-card-title>
+  <mat-card-subtitle>
+    <span>{{data.carrier}}</span>
+
+    <span style="margin-left: 50%;">Rs&nbsp;{{data.price}}</span>
+  </mat-card-subtitle>
+  
+  <mat-card-content>
+      <div [hidden]="!data.details.route" #gmap style="width:600px;height:400px"></div>
+      <div [hidden]="data.details.route" style="text-align: center;">No routes available</div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    Ports: <b>{{data.details ? data.details.fromport : 'NA'}}</b> to <b>{{data.details ? data.details.toport : 'NA'}}</b>  
+    <button style="float: right;" (click)="print()" mat-raised-button color="primary">Print</button>
+  </mat-card-actions>
+  <mat-card-footer>
+  </mat-card-footer>
+</mat-card>

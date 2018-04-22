@@ -1,0 +1,63 @@
+<div class="flex-container">
+
+  <div class="flex-content">
+
+  <div class="w3-xlarge">
+    <a class="w3-bar-item w3-button w3-text-red w3-hover-red"><b><i class="fa fa-map-marker w3-margin-right"></i>Minxpay</b></a>
+  </div>
+  <mat-card class="login-header">{{registerView ? 'Register' : 'Login'}}</mat-card>
+
+    <mat-form-field *ngIf="registerView">
+      <input [(ngModel)]="firstname" #firtnamevalidator="ngModel" required matInput placeholder="Firstname">
+    </mat-form-field>
+  
+    <mat-form-field *ngIf="registerView">
+      <input [(ngModel)]="lastname" #lastnamevalidator="ngModel" required matInput placeholder="Lastname">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input [(ngModel)]="user" #uservalidator="ngModel" required matInput placeholder="Username/Email">
+    </mat-form-field>
+
+    <!-- <div *ngIf="uservalidator.invalid && (uservalidator.dirty || uservalidator.touched)">
+      Invalid user
+    </div> -->
+  
+    <mat-form-field>
+      <input [(ngModel)]="password" #passwordvalidator="ngModel" required type="password" matInput placeholder="Password">
+    </mat-form-field>
+
+    <!-- <div *ngIf="passwordvalidator.invalid && (passwordvalidator.dirty || passwordvalidator.touched)">
+      Invalid passsword
+    </div> -->
+    <div class="remember-me-container" *ngIf="!registerView">
+      <mat-checkbox color="primary" class="example-margin" [(ngModel)]="rememberMe" checked=true>Remember Me</mat-checkbox>
+    </div>
+
+    <mat-card class="login-danger" *ngIf="invalidLogin">Login failed</mat-card>
+    
+    <mat-card class="login-danger" *ngIf="invalidRegister">Regitration failed</mat-card>
+
+    <button *ngIf="!registerView" (click)="login()" mat-raised-button color="primary">
+        Login
+    </button>
+
+
+    <button *ngIf="registerView" (click)="register()" mat-raised-button color="primary">
+        Register
+    </button>
+
+    <div class="redirect-container" *ngIf="!registerView">
+      Not a member yet? <a routerLink="/register">Register</a>
+    </div>
+
+    <div class="redirect-container" *ngIf="registerView">
+        Already a member? <a routerLink="/login">Sign in</a>
+      </div>
+    <!--<mat-form-field>
+      <mat-select placeholder="Select">
+        <mat-option value="option">Option</mat-option>
+      </mat-select>
+    </mat-form-field>-->
+  </div>
+</div>

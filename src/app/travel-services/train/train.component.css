@@ -1,0 +1,15 @@
+.train-container{
+    height: 100vh;
+    background-image: url('assets/images/trains-header.jpg');
+    /* background-repeat: no-repeat; */
+    background-attachment: fixed;
+    /* background-position: center;  */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.autocomplete-inputs{
+    width: 25%;
+}
